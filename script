@@ -27,3 +27,12 @@ from clientes cl, cidades ci
 where cl.idcidade=ci.idcidade
 group by ci.nomecidade
 
+6
+select to_char(v.datavenda,'DD/MM/YYYY')
+from vendas v
+group by to_char(v.datavenda,'MM/YYYY')
+order by to_char(v.datavenda,'MM/YYYY')
+
+11
+
+
