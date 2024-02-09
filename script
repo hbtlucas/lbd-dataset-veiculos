@@ -1,0 +1,29 @@
+1
+select * from 
+cidades c where c.estado ='MT' 
+AND c.nomecidade like '%c%';
+
+2
+select c.nomecliente, c.cpf
+from clientes c 
+where c.cpf like '%00'
+
+3
+select cl.nomecliente, ci.nomecidade, vl.modelo
+from clientes cl, cidades ci, vendas ve, veiculos vl
+where cl.idcidade=ci.idcidade
+and cl.idcliente=ve.idcliente
+and ve.idveiculo=vl.idveiculo
+
+4
+select fp.descricaoformapgto,count(*) total
+from formaspagamento fp, vendas ve
+where fp.idformaspgto=ve.idformaspgto
+group by fp.descricaoformapgto
+
+5
+select ci.nomecidade, count(*) total 
+from clientes cl, cidades ci
+where cl.idcidade=ci.idcidade
+group by ci.nomecidade
+
