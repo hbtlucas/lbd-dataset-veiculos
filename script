@@ -34,8 +34,60 @@ from vendas v
 group by to_char(v.datavenda,'MM/YYYY')
 order by to_char(v.datavenda,'MM/YYYY')
 
-7. Quantidade de vendedores por fabricante de veículo.
+7)
+select fa.nomefabricante,count(*) total
+from vendas vd,veiculos ve,fabricantes fa
+where vd.idveiculo=ve.idveiculo
+and fa.idfabricante=ve.idfabricante
+group by fa.nomefabricante
 
+8)
+select ve.modelo,to_char(vd.datavenda,'MM') mes,count(*) total
+from veiculos ve,vendas vd
+where vd.idveiculo=ve.idveiculo
+group by ve.modelo,to_char(vd.datavenda,'MM')
 
+9)
+select ve.nomevendedor,count(*) t
+from vendas vd,vendedores ve
+where vd.idvendedor=ve.idvendedor
+group by ve.nomevendedor
 
+10)
+select ci.nomecidade,count(*) t
+from vendas vd,cidades ci, clientes cl
+where vd.idcliente=cl.idcliente
+and ci.idcidade=cl.idcidade
+group by ci.nomecidade
 
+11)
+select cl.nomecliente,count(*) total
+from clientes cl,vendas ve
+where cl.idcliente=ve.idcliente
+group by cl.nomecliente
+having count(*)=
+(
+select max(tabela.total) from (
+select vd.idcliente,count(*) total 
+from vendas vd
+group by vd.idcliente) tabela)
+
+12)
+Apresentar os clientes que realizaram as maiores compras "valor(es)" [Soma de valores].
+select cn.nomecliente,sum(vc.valor) 
+from vendas vn,clientes cn,veiculos vc
+where vn.idcliente=cn.idcliente
+and vn.idveiculo=vc.idveiculo
+group by cn.nomecliente
+having sum(vc.valor)=
+(
+select max(somas.v) from 
+(select ve.idcliente,sum(vl.valor) v
+from veiculos vl,vendas ve
+where vl.idveiculo=ve.idveiculo
+group by ve.idcliente) somas)
+
+13)
+select substring(cl.nomecliente,1,position(' ' in cl.nomecliente)),count(*) total
+from clientes cl
+group by substring(cl.nomecliente,1,position(' ' in cl.nomecliente))
