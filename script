@@ -1,38 +1,41 @@
-1
+1. Apresentar todas as cidades de Mato Grosso iniciadas com a letra R.
 select * from 
 cidades c where c.estado ='MT' 
-AND c.nomecidade like '%c%';
+AND c.nomecidade like '%r';
 
-2
+2. Apresentar nomes dos clientes com CPF terminados em 00.
 select c.nomecliente, c.cpf
 from clientes c 
 where c.cpf like '%00'
 
-3
+3. Apresentar nomes dos clientes com respectivas cidades, e veículos 
+adquiridos.
 select cl.nomecliente, ci.nomecidade, vl.modelo
 from clientes cl, cidades ci, vendas ve, veiculos vl
 where cl.idcidade=ci.idcidade
 and cl.idcliente=ve.idcliente
 and ve.idveiculo=vl.idveiculo
 
-4
+4. Total de formas de pagamento utilizadas por clientes.
 select fp.descricaoformapgto,count(*) total
 from formaspagamento fp, vendas ve
 where fp.idformaspgto=ve.idformaspgto
 group by fp.descricaoformapgto
 
-5
+5. Total de clientes por cidades.
 select ci.nomecidade, count(*) total 
 from clientes cl, cidades ci
 where cl.idcidade=ci.idcidade
 group by ci.nomecidade
 
-6
+6. Total de venda por mês e ano.
 select to_char(v.datavenda,'DD/MM/YYYY')
 from vendas v
 group by to_char(v.datavenda,'MM/YYYY')
 order by to_char(v.datavenda,'MM/YYYY')
 
-11
+7. Quantidade de vendedores por fabricante de veículo.
+
+
 
 
