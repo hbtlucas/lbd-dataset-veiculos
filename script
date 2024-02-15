@@ -87,7 +87,14 @@ from veiculos vl,vendas ve
 where vl.idveiculo=ve.idveiculo
 group by ve.idcliente) somas)
 
-13)
+13) Apresentar nomes de clientes agrupados pelo primeiro nome.
 select substring(cl.nomecliente,1,position(' ' in cl.nomecliente)),count(*) total
 from clientes cl
 group by substring(cl.nomecliente,1,position(' ' in cl.nomecliente))
+
+14) Total de vendas por cidade da revenda.
+select c.nomecidade, count(*) total
+from revendas r, vendas v, cidades c
+where r.idcidade=c.idcidade
+and r.idrevenda=v.idrevenda
+group by c.nomecidade
