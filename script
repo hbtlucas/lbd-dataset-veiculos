@@ -98,3 +98,15 @@ from revendas r, vendas v, cidades c
 where r.idcidade=c.idcidade
 and r.idrevenda=v.idrevenda
 group by c.nomecidade
+
+15.Apresentar todos os clientes e revendas Mato Grosso na mesma
+sentença
+select cl.nomecliente
+from clientes cl, cidades ci
+where cl.idcidade = ci.idcidade
+and ci.estado = 'SP'
+union
+select re.nomerevenda
+from revendas re, cidades ci
+where re.idcidade=ci.idcidade
+and ci.estado='SP'
