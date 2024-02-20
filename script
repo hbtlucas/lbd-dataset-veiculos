@@ -110,3 +110,45 @@ select re.nomerevenda
 from revendas re, cidades ci
 where re.idcidade=ci.idcidade
 and ci.estado='SP'
+
+16)
+select ve.modelo,count(*) quantidade
+from veiculos ve,vendas vd
+where ve.idveiculo=vd.idveiculo
+group by ve.modelo
+
+17)
+select ve.idveiculo,ve.modelo
+from veiculos ve
+where 
+ve.idveiculo not in
+(select vd.idveiculo 
+from vendas vd)
+
+18)
+select vl.modelo,vd.datavenda
+from veiculos vl,vendas vd
+where vl.idveiculo=vd.idveiculo
+and vd.datavenda = (select min(ve.datavenda)
+from vendas ve)
+
+19)
+select fa.nomefabricante,count(*) TotalFabricantes
+from veiculos ve,fabricantes fa
+where ve.idfabricante=fa.idfabricante
+group by fa.nomefabricante
+
+20)
+select ve.modelo,ve.potenciahp
+from veiculos ve
+where ve.potenciahp = (
+select max(vl.potenciahp)
+from veiculos vl)
+
+21)
+select cl.nomecliente,cl.cpf
+from clientes cl,vendas vd
+where cl.idcliente=vd.idcliente
+and vd.datavenda=(select min(ve.datavenda)
+from vendas ve)
+
